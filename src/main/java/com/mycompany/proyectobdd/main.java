@@ -5,10 +5,15 @@
  */
 package com.mycompany.proyectobdd;
 
+import Conexion.Conexiones;
+
 /**
  *
  * @author super
  */
 public class main {
-    
+    public static void main(String[] args) {
+        Conexiones bdd = new Conexiones();
+        bdd.conectar();
+    }
 }
