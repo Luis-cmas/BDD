@@ -5,14 +5,18 @@
  */
 package com.mycompany.proyectobdd;
 
+import Conexion.Conexiones;
+
 import java.util.Scanner;
 
 /**
  *
- * @author Equipo 9
+ * @author super
  */
-public class Proyecto {
-    public static void main (String[] args){
+public class main {
+    public static void main(String[] args) {
+        Conexiones bdd = new Conexiones();
+        bdd.conectar();
         Scanner sn = new Scanner(System.in);
         boolean salir = false;
         int op;
@@ -31,8 +35,8 @@ public class Proyecto {
             System.out.println("11.-Salir");
 
             System.out.println("Escoga una opcion");
-            op=sn.nextInt();
-            switch (op){
+            op = sn.nextInt();
+            switch (op) {
                 case 1:
                     System.out.println("Opcion 1 Total de las ventas de los productos por categoria");
                     break;
@@ -76,7 +80,7 @@ public class Proyecto {
                     break;
 
                 case 11:
-                    salir=true;
+                    salir = true;
                     break;
                 default:
                     System.out.println("Ingrese una opcion valida, por favor");
