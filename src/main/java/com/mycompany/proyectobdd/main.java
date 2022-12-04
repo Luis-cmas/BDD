@@ -6,6 +6,7 @@
 package com.mycompany.proyectobdd;
 
 import Conexion.Conexiones;
+import java.sql.CallableStatement;
 
 import java.util.Scanner;
 
@@ -17,10 +18,12 @@ public class main {
     public static void main(String[] args) {
         Conexiones bdd = new Conexiones();
         bdd.conectar();
+        
+        
         Scanner sn = new Scanner(System.in);
-        boolean salir = false;
+        boolean salir = true;
         int op;
-        while (!salir) {
+        while (salir) {
             System.out.println("Bienvenido, ¿Qué desea?");
             System.out.println("1)Determinar el total de las ventas de los productos de una categoría ");
             System.out.println("2)Determinar el producto más solicitado para la región y en que territorio de la región tiene mayor demanda");
@@ -33,17 +36,25 @@ public class main {
             System.out.println("9)Determinar cual es el total de las ventas en cada una de las regiones por un rango de fechas establecidas");
             System.out.println("10)Determinar los 5 productos menos vendidos en un rango de fecha establecido ");
             System.out.println("11.-Salir");
-
+         try{
             System.out.println("Escoga una opcion");
             op = sn.nextInt();
+            
             switch (op) {
                 case 1:
                     System.out.println("Opcion 1 Total de las ventas de los productos por categoria");
+                    System.out.println("introduzca la categoria:");
+                    Scanner sn2=new Scanner(System.in);
+                    int categoria = sn.nextInt();
+                    CallableStatement statement = bdd.conectar().prepareCall("{call sp_consulta_A(?)}");
+                    statement.setInt(1,categoria);
+                    
                     break;
 
                 case 2:
                     System.out.println("Opcion 2 Determinar el producto mas solicitado y en que territorio");
-
+                    Scanner sn3=new Scanner(System.in);
+                    int op3 = sn.nextInt();
                     break;
 
                 case 3:
@@ -80,11 +91,14 @@ public class main {
                     break;
 
                 case 11:
-                    salir = true;
+                    salir = false;
                     break;
                 default:
                     System.out.println("Ingrese una opcion valida, por favor");
 
+            }
+            }catch(Exception e){
+                System.out.println(e);
             }
         }
     }

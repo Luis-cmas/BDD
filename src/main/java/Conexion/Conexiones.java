@@ -8,6 +8,7 @@ package Conexion;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.CallableStatement;
 
 /**
  *
@@ -15,10 +16,10 @@ import java.sql.SQLException;
  */
 public class Conexiones {
     Connection  miconexion = null;
-    String usuario = "luis";
-    String password = "pat0$verdes";
-    String bd = "otrosAW";
-    String ip = "proyecto-bdd.database.windows.net";    
+    String usuario = "unicornio";
+    String password = "Chapi01$";
+    String bd = "productionAW";
+    String ip = "advew.database.windows.net";    
     String puerto = "1434";
     
     String cadena = "jdbc:sqlserver://"+ip+":"+puerto+";";
