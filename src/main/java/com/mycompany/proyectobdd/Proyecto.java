@@ -11,7 +11,7 @@ import java.util.Scanner;
  *
  * @author Equipo 9
  */
-public class main {
+public class Proyecto {
     public static void main (String[] args){
         Scanner sn = new Scanner(System.in);
         boolean salir = false;

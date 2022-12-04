@@ -22,8 +22,8 @@ public class Conexion {
     String puerto = "1433";
     
     String cadena = "jdbc:sqlserver://"+ip+""+puerto+""+bd;
-    try{
-    }catch(exception){}
+    /*try{
+    }catch(exception){}*/
     
     
     
