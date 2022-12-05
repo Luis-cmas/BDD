@@ -122,7 +122,7 @@ public class main {
                     int oid5 = sn.nextInt();
                     
                      //llamamos al procedimiento
-                    CallableStatement statement5 = bdd.conectar().prepareCall("{call sp_consulta_C(?,?)}");
+                    CallableStatement statement5 = bdd.conectar().prepareCall("{call sp_consulta_E(?,?)}");
                     statement5.setInt(1,cant5);//asignamos el primer(unico) parametro al procedimiento
                     statement5.setInt(2,oid5);
                     statement5.execute();//ejecutamos el procedimiento
@@ -141,7 +141,7 @@ public class main {
                     int Order = sn.nextInt();
                     
                     //llamando al procedimiento
-                    CallableStatement statement6 = bdd.conectar().prepareCall("{call sp_consulta_C(?,?)}");
+                    CallableStatement statement6 = bdd.conectar().prepareCall("{call sp_consulta_F(?,?)}");
                     statement6.setInt(1,envio);//asignamos el primer(unico) parametro al procedimiento
                     statement6.setInt(2,Order);
                     statement6.execute();//ejecutamos el procedimiento
@@ -164,7 +164,7 @@ public class main {
                     
                     //llamando al procedimiento
                     
-                    CallableStatement statement7 = bdd.conectar().prepareCall("{call sp_consulta_C(?,?)}");
+                    CallableStatement statement7 = bdd.conectar().prepareCall("{call sp_consulta_G(?,?,?)}");
                     statement7.setString(1,fName);//asignamos el primer(unico) parametro al procedimiento
                     statement7.setString(2,lName);
                     statement7.setString(3,correo);
@@ -177,18 +177,20 @@ public class main {
 
                 case 8:
                     System.out.println("Opcion 8 Determinar el empleado que atendió más ordenes por territorio/región");
-                    System.out.println("Introduzca el territorio");
-                    Scanner sn8=new Scanner(System.in);
-                    int terri5 = sn.nextInt();
+                    //System.out.println("Introduzca el territorio");
+                    //Scanner sn8=new Scanner(System.in);
+                    //int terri5 = sn.nextInt();
                     
-                    CallableStatement statement8 = bdd.conectar().prepareCall("{call sp_consulta_D(?)}");
-                    statement8.setInt(1,terri5);//asignamos el primer(unico) parametro al procedimiento
+                    CallableStatement statement8 = bdd.conectar().prepareCall("{call sp_consulta_H}");
+                    //statement8.setInt(1,terri5);//asignamos el primer(unico) parametro al procedimiento
                     statement8.execute();//ejecutamos el procedimiento
                     ResultSet consulta8 =statement8.getResultSet();//guardamos resultados
                     
                     //recorremos los resultados obtenidos del procedimiento
                     while(consulta8.next()){
-                        System.out.println("columna:"+consulta8.getRow()+"\nCustomerID:"+consulta8.getString(1)+"\n\n");
+                        System.out.println("columna:"+consulta8.getRow()+"\nTerritoryID:"+consulta8.getString(1)
+                                           +"\nSalesPersonID:"+consulta8.getString(2)+"\nNombre:"+consulta8.getString(3)
+                                           +"\nApellido:"+consulta8.getString(4)+"\nTotal pedidos:"+consulta8.getString(5)+"\n\n");
                     }
                     break;
 
@@ -202,7 +204,7 @@ public class main {
                     String fechaSalida = sn.next();
                     
                     //llamando al proceimiento
-                    CallableStatement statement9 = bdd.conectar().prepareCall("{call sp_consulta_D(?)}");
+                    CallableStatement statement9 = bdd.conectar().prepareCall("{call sp_consulta_I(?,?)}");
                     statement9.setString(1,fechaEntrada);//asignamos el primer(unico) parametro al procedimiento
                     statement9.setString(2,fechaSalida);
                     statement9.execute();//ejecutamos el procedimiento
@@ -210,8 +212,9 @@ public class main {
                     
                     //recorremos los resultados obtenidos del procedimiento
                     while(consulta9.next()){
-                        System.out.println("columna:"+consulta9.getRow()+"\nfechaEntrada:"+consulta9.getString(1)+"\nfechaSalida: "+consulta9.getString(2)+"\n\n");
+                        System.out.println("columna:"+consulta9.getRow()+"\nTerritoryID:"+consulta9.getString(1)+"\nTotal ventas:"+consulta9.getString(2)+"\n\n");
                     }
+                    
                     break;
 
                 case 10:
