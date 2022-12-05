@@ -20,7 +20,7 @@ public class Conexiones {
     String password = "Chapi01$";
     String bd = "productionAW";
     String ip = "advew.database.windows.net";    
-    String puerto = "1434";
+    String puerto = "1433";
     
     String cadena = "jdbc:sqlserver://"+ip+":"+puerto+";";
     public Connection conectar(){
