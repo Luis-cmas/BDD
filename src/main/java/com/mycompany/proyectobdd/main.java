@@ -61,7 +61,7 @@ public class main {
                         System.out.println("columna:"+consulta.getRow()+"\nTerritorioID:"+consulta.getString(1)+"\nVentas:"+consulta.getString(2)+"\n\n");
                     }
                     
-                    System.out.println("/npresione una tecla para continuar");
+                    System.out.println("/nPresione una tecla para continuar");
                     Scanner sn22=new Scanner(System.in);
                     String relleno = sn.next();
                     break;
@@ -130,29 +130,93 @@ public class main {
                     
                     System.out.println("\nOperacion realizada!");
                     
-                    
                     break;
 
                 case 6:
                     System.out.println("Opcion 6 Actualizar el método de envío de una orden que se reciba");
+                    System.out.println("Introduzca el metodo de envio");
+                    Scanner sn6 = new Scanner(System.in);
+                    int envio = sn.nextInt();
+                    System.out.println("Introduzca el ID de la orden");
+                    int Order = sn.nextInt();
                     
+                    //llamando al procedimiento
+                    CallableStatement statement6 = bdd.conectar().prepareCall("{call sp_consulta_C(?,?)}");
+                    statement6.setInt(1,envio);//asignamos el primer(unico) parametro al procedimiento
+                    statement6.setInt(2,Order);
+                    statement6.execute();//ejecutamos el procedimiento
+                    ResultSet consulta6 =statement6.getResultSet();//guardamos resultados
+                    
+                    System.out.println("\nEnvio actualizado!");
                     
                     break;
 
                 case 7:
                     System.out.println("Opcion 7 Actualizar el correo electrónico de una cliente que se reciba");
+                    System.out.println("Introuzca su nombre");
+                    Scanner sn7 = new Scanner(System.in);
+                    String fName = sn.next();
+                    System.out.println("Introduzca el apellido");
+                    Scanner s62 = new Scanner(System.in);
+                    String lName = sn.next();
+                    System.out.println("Introduzca el correo");
+                    String correo = sn.next();
+                    
+                    //llamando al procedimiento
+                    
+                    CallableStatement statement7 = bdd.conectar().prepareCall("{call sp_consulta_C(?,?)}");
+                    statement7.setString(1,fName);//asignamos el primer(unico) parametro al procedimiento
+                    statement7.setString(2,lName);
+                    statement7.setString(3,correo);
+                    statement7.execute();//ejecutamos el procedimiento
+                    ResultSet consulta7 =statement7.getResultSet();//guardamos resultados
+                    
+                    System.out.println("\nCorreo actualizado!");
+                    
                     break;
 
                 case 8:
                     System.out.println("Opcion 8 Determinar el empleado que atendió más ordenes por territorio/región");
+                    System.out.println("Introduzca el territorio");
+                    Scanner sn8=new Scanner(System.in);
+                    int terri5 = sn.nextInt();
+                    
+                    CallableStatement statement8 = bdd.conectar().prepareCall("{call sp_consulta_D(?)}");
+                    statement8.setInt(1,terri5);//asignamos el primer(unico) parametro al procedimiento
+                    statement8.execute();//ejecutamos el procedimiento
+                    ResultSet consulta8 =statement8.getResultSet();//guardamos resultados
+                    
+                    //recorremos los resultados obtenidos del procedimiento
+                    while(consulta8.next()){
+                        System.out.println("columna:"+consulta8.getRow()+"\nCustomerID:"+consulta8.getString(1)+"\n\n");
+                    }
                     break;
 
                 case 9:
                     System.out.println("Opcion 9 Determinar cual es el total de las ventas en cada una de las regiones");
+                    System.out.println("Introduzca la fecha de entrada");
+                    Scanner sn9 = new Scanner(System.in);
+                    String fechaEntrada = sn.next();
+                    System.out.println("Introduzca la fecha de Salida");
+                    Scanner sn92 = new Scanner(System.in);
+                    String fechaSalida = sn.next();
+                    
+                    //llamando al proceimiento
+                    CallableStatement statement9 = bdd.conectar().prepareCall("{call sp_consulta_D(?)}");
+                    statement9.setString(1,fechaEntrada);//asignamos el primer(unico) parametro al procedimiento
+                    statement9.setString(2,fechaSalida);
+                    statement9.execute();//ejecutamos el procedimiento
+                    ResultSet consulta9 =statement9.getResultSet();//guardamos resultados
+                    
+                    //recorremos los resultados obtenidos del procedimiento
+                    while(consulta9.next()){
+                        System.out.println("columna:"+consulta9.getRow()+"\nfechaEntrada:"+consulta9.getString(1)+"\nfechaSalida: "+consulta9.getString(2)+"\n\n");
+                    }
                     break;
 
                 case 10:
                     System.out.println("Opcion 10 Determinar los 5 productos menos vendidos en un rango de fecha establecido");
+                    System.out.println("");
                     break;
 
                 case 11:
