@@ -487,9 +487,8 @@ public class Inicio extends javax.swing.JFrame {
                    System.out.println("consulta 8");
           
                break;
-               case 4:
-                   System.out.println("consulta 9");
-         
+               case 4:            
+                   
                break;
                case 5:
                    System.out.println("consulta 10");
@@ -557,7 +556,6 @@ public class Inicio extends javax.swing.JFrame {
                     String nom=jText_Nombre.getText();
                     String ap=jText_Nombre.getText();
                     String correo=jText_Nombre.getText();
-                    JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
                     
                     try{
                         CallableStatement statement7 = bdd.conectar().prepareCall("{call sp_consulta_G(?,?,?)}");
