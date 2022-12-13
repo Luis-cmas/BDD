@@ -19,6 +19,7 @@ public class main {
     public static void main(String[] args) {
         Conexiones bdd = new Conexiones();
         bdd.conectar();
+  
         
         
         Scanner sn = new Scanner(System.in);

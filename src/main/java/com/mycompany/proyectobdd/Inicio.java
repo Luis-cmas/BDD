@@ -8,7 +8,9 @@ import Conexion.Conexiones;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Vector;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -24,6 +26,75 @@ public class Inicio extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);//Colooca la ventana en medio de la pantalla
         setTitle("Adventure");//Cambia el titulo del frame
         
+        
+    }
+    
+    void limpiar(){
+          jText_Categoria.setText("");
+          jText_Localidad.setText("");
+          jText_Cantidad.setText("");
+          jText_Apellido.setText("");
+          jText_Correo.setText("");
+          jText_Metodo.setText("");
+          jText_Nombre.setText("");
+          jText_Territorio.setText("");
+          jText_Orden.setText("");
+    }
+    
+    void modeloConsulta1(){
+        DefaultTableModel C1= new DefaultTableModel();
+        String[] col1= new String []{"Territorio ID","Ventas"};
+        C1.setColumnIdentifiers(col1);
+        jTableDatos.setModel(C1);
+        jText_Categoria.setEnabled(true);
+        jText_Localidad.setEnabled(false);
+        jText_Cantidad.setEnabled(false);
+        jText_Apellido.setEnabled(false);
+        jText_Correo.setEnabled(false);
+        jText_Metodo.setEnabled(false);
+        jText_Nombre.setEnabled(false);
+        jText_Territorio.setEnabled(false);
+        jText_Orden.setEnabled(false);
+        
+    }
+    void modeloConsulta2(){
+        DefaultTableModel C2= new DefaultTableModel();
+        String[] col2= new String []{"Territorio ID","Ventas"};
+        C2.setColumnIdentifiers(col2);
+        jTableDatos.setModel(C2); 
+        jText_Categoria.setEnabled(false);
+        jText_Localidad.setEnabled(false);
+        jText_Cantidad.setEnabled(false);
+        jText_Apellido.setEnabled(false);
+        jText_Correo.setEnabled(false);
+        jText_Metodo.setEnabled(false);
+        jText_Nombre.setEnabled(false);
+        jText_Territorio.setEnabled(false);
+        jText_Orden.setEnabled(false);
+        
+    }
+    void casillasConsulta3(){
+        
+    }
+    void casillasConsulta4(){
+        
+    }
+    void casillasConsulta5(){
+        
+    }
+    void casillasConsulta6(){
+        
+    }
+    void casillasConsulta7(){
+        
+    }
+    void casillasConsulta8(){
+        
+    }
+    void casillasConsulta9(){
+        
+    }
+    void casillasConsulta10(){
         
     }
 
@@ -46,7 +117,7 @@ public class Inicio extends javax.swing.JFrame {
         jRadio_Actializacion = new javax.swing.JRadioButton();
         jBox_Actualizar = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableDatos = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -114,7 +185,7 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -125,7 +196,7 @@ public class Inicio extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(jTableDatos);
 
         jLabel3.setText("Localidad:");
 
@@ -312,31 +383,21 @@ public class Inicio extends javax.swing.JFrame {
         }else{
             switch(numero){
                 case 0:
-                    System.out.println("consulta 1");
-                    jText_Categoria.setEnabled(true);
-                    jText_Localidad.setEnabled(false);
-                    jText_Cantidad.setEnabled(false);
-                    jText_Apellido.setEnabled(false);
-                    jText_Correo.setEnabled(false);
-                    jText_Metodo.setEnabled(false);
-                    jText_Nombre.setEnabled(false);
-                    jText_Territorio.setEnabled(false);
-                    jText_Orden.setEnabled(false);
+                    System.out.println("consulta 1");            
+                    modeloConsulta1();
+                    limpiar();
                 break;
                case 1:
                    System.out.println("consulta 2");
-                   jText_Categoria.setEnabled(false);
-                   jText_Localidad.setEnabled(false);
-                   jText_Cantidad.setEnabled(false);
-                   jText_Apellido.setEnabled(false);
-                   jText_Correo.setEnabled(false);
-                   jText_Metodo.setEnabled(false);
-                   jText_Nombre.setEnabled(false);
-                   jText_Territorio.setEnabled(false);
-                   jText_Orden.setEnabled(false);
+                   modeloConsulta2();
+                   limpiar();
                break;
                case 2:
                    System.out.println("consulta 4");
+                   DefaultTableModel C4= new DefaultTableModel();
+                   String[] col4= new String []{"Customer ID"};
+                   C4.setColumnIdentifiers(col4);
+                   jTableDatos.setModel(C4); 
                    jText_Categoria.setEnabled(false);
                    jText_Localidad.setEnabled(false);
                    jText_Cantidad.setEnabled(false);
@@ -346,9 +407,14 @@ public class Inicio extends javax.swing.JFrame {
                    jText_Nombre.setEnabled(false);
                    jText_Territorio.setEnabled(true);
                    jText_Orden.setEnabled(false);
+                   limpiar();
                break;
                case 3:
                    System.out.println("consulta 8");
+                   DefaultTableModel C8= new DefaultTableModel();
+                   String[] col8= new String []{"Territorio ID","SalesPersonID","Nombre","Apellidos","Total de pedidos"};
+                   C8.setColumnIdentifiers(col8);
+                   jTableDatos.setModel(C8); 
                    jText_Categoria.setEnabled(false);
                    jText_Localidad.setEnabled(false);
                    jText_Cantidad.setEnabled(false);
@@ -358,9 +424,14 @@ public class Inicio extends javax.swing.JFrame {
                    jText_Nombre.setEnabled(false);
                    jText_Territorio.setEnabled(false);
                    jText_Orden.setEnabled(false);
+                   limpiar();
                break;
                case 4:
                    System.out.println("consulta 9");
+                   DefaultTableModel C9= new DefaultTableModel();
+                   String[] col9= new String []{"Territorio ID","Total de Ventas"};
+                   C9.setColumnIdentifiers(col9);
+                   jTableDatos.setModel(C9); 
                    jText_Categoria.setEnabled(true);
                    jText_Localidad.setEnabled(false);
                    jText_Cantidad.setEnabled(false);
@@ -370,9 +441,14 @@ public class Inicio extends javax.swing.JFrame {
                    jText_Nombre.setEnabled(false);
                    jText_Territorio.setEnabled(false);
                    jText_Orden.setEnabled(false);
+                   limpiar();
                break;
                case 5:
                    System.out.println("consulta 10");
+                   DefaultTableModel C10= new DefaultTableModel();
+                   String[] col10= new String []{"Territorio ID","Total de Ventas"};
+                   C10.setColumnIdentifiers(col10);
+                   jTableDatos.setModel(C10); 
                    jText_Categoria.setEnabled(true);
                    jText_Localidad.setEnabled(false);
                    jText_Cantidad.setEnabled(false);
@@ -382,6 +458,7 @@ public class Inicio extends javax.swing.JFrame {
                    jText_Nombre.setEnabled(false);
                    jText_Territorio.setEnabled(false);
                    jText_Orden.setEnabled(false);
+                   limpiar();
                break;
                default:                  
            }
@@ -402,6 +479,7 @@ public class Inicio extends javax.swing.JFrame {
                jText_Nombre.setEnabled(false);
                jText_Territorio.setEnabled(false);
                jText_Orden.setEnabled(false);
+               limpiar();
             
         }else{
         
@@ -417,6 +495,8 @@ public class Inicio extends javax.swing.JFrame {
                     jText_Nombre.setEnabled(false);
                     jText_Territorio.setEnabled(false);
                     jText_Orden.setEnabled(false);
+                    limpiar();
+                    
                 break;
                 case 1:
                     System.out.println("consulta 5");
@@ -429,6 +509,7 @@ public class Inicio extends javax.swing.JFrame {
                     jText_Nombre.setEnabled(false);
                     jText_Territorio.setEnabled(false);
                     jText_Orden.setEnabled(true);
+                    limpiar();
                 break;
                 case 2:
                     System.out.println("consulta 6");
@@ -441,6 +522,7 @@ public class Inicio extends javax.swing.JFrame {
                     jText_Nombre.setEnabled(false);
                     jText_Territorio.setEnabled(false);
                     jText_Orden.setEnabled(true);
+                    limpiar();
                 break;
                 case 3:
                     System.out.println("consulta 7");
@@ -453,6 +535,7 @@ public class Inicio extends javax.swing.JFrame {
                     jText_Metodo.setEnabled(false);               
                     jText_Territorio.setEnabled(false);
                     jText_Orden.setEnabled(false);
+                    limpiar();
                 break;
                 default:
              }    
@@ -473,14 +556,60 @@ public class Inicio extends javax.swing.JFrame {
             switch(numConsulta){
                 case 0:
                     System.out.println("consulta 1");
+                    DefaultTableModel modelo=(DefaultTableModel)jTableDatos.getModel();//Obtenemos el modelo de la tabla para obtener los titulos
+                    int cat=Integer.parseInt(jText_Categoria.getText());//Obtenemos el parametro para el SP
+                    modelo.setRowCount(0);//Limpiamos la tabla
+                    try{
+                    CallableStatement statement = bdd.conectar().prepareCall("{call sp_consulta_A(?)}");
+                    statement.setInt(1,cat);//asignamos el  parametro al procedimiento
+                    statement.execute();//ejecutamos el procedimiento
+                    ResultSet consulta =statement.getResultSet();//guardamos resultados
+                    
+                    //recorremos los resultados obtenidos del procedimiento
+                    while(consulta.next()){
+                        Vector v=new Vector();
+                        v.add(consulta.getInt(1));//GUardamos los datos de la primera columna
+                        v.add(consulta.getInt(2));//GUardamos los datos de la segunda columna
+                        modelo.addRow(v);//Agregamos los datos de las columnas guardadas a la tabla
+                        jTableDatos.setModel(modelo);//Aplicamos el modelo ocn los datos al objeto tabla
+                        System.out.println("columna:"+consulta.getRow()+"\nTerritorioID:"+consulta.getString(1)+"\nVentas:"+consulta.getString(2)+"\n\n");
+                    }
+                        
+                    }catch(SQLException ex){
+                        
+                    }
+                    
           
                 break;
+
+
                case 1:
                    System.out.println("consulta 2");
          
                break;
                case 2:
                    System.out.println("consulta 4");
+                    DefaultTableModel modelo1=(DefaultTableModel)jTableDatos.getModel();//Obtenemos el modelo de la tabla para obtener los titulos
+                    int terr=Integer.parseInt(jText_Territorio.getText());//Obtenemos el parametro para el SP
+                    modelo1.setRowCount(0);//Limpiamos la tabla
+                    try{
+                    CallableStatement statement4 = bdd.conectar().prepareCall("{call sp_consulta_D(?)}");
+                    statement4.setInt(1,terr);//asignamos el primer(unico) parametro al procedimiento
+                    statement4.execute();//ejecutamos el procedimiento
+                    ResultSet consulta4 =statement4.getResultSet();//guardamos resultados
+                    
+                    //recorremos los resultados obtenidos del procedimiento
+                    while(consulta4.next()){
+                        Vector v=new Vector();
+                        v.add(consulta4.getInt(1));//GUardamos los datos de la primera columna
+                        modelo1.addRow(v);//Agregamos los datos de las columnas guardadas a la tabla
+                        jTableDatos.setModel(modelo1);//Aplicamos el modelo ocn los datos al objeto tabla
+                        
+                    }
+                        
+                    }catch(SQLException ex){
+                        
+                    }
           
                break;
                case 3:
@@ -510,7 +639,7 @@ public class Inicio extends javax.swing.JFrame {
                     statement3.setInt(1,cat);//asignamos el primer(unico) parametro al procedimiento
                     statement3.setInt(2,loc);
                     statement3.execute();//ejecutamos el procedimiento
-                    ResultSet consulta3 =statement3.getResultSet();//guardamos resultados
+                    ResultSet consulta3=statement3.getResultSet();//guardamos resultados
                     JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
                     }catch(SQLException ex){
                         
@@ -633,7 +762,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadio_Actializacion;
     private javax.swing.JRadioButton jRadio_Consulta;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableDatos;
     private javax.swing.JTextField jText_Apellido;
     private javax.swing.JTextField jText_Cantidad;
     private javax.swing.JTextField jText_Categoria;
