@@ -29,6 +29,20 @@ public class Inicio extends javax.swing.JFrame {
         
     }
     
+    void defaultModel(){
+        jText_Categoria.setEnabled(false);
+        jText_Localidad.setEnabled(false);
+        jText_Cantidad.setEnabled(false);
+        jText_Apellido.setEnabled(false);
+        jText_Correo.setEnabled(false);
+        jText_Metodo.setEnabled(false);
+        jText_Nombre.setEnabled(false);
+        jText_Territorio.setEnabled(false);
+        jText_Orden.setEnabled(false);
+        jText_FechaE.setEnabled(false);
+        jText_FechaS.setEnabled(false);
+    }
+    
     void limpiar(){
           jText_Categoria.setText("");
           jText_Localidad.setText("");
@@ -55,6 +69,8 @@ public class Inicio extends javax.swing.JFrame {
         jText_Nombre.setEnabled(false);
         jText_Territorio.setEnabled(false);
         jText_Orden.setEnabled(false);
+        jText_FechaE.setEnabled(false);
+        jText_FechaS.setEnabled(false);
         
     }
     void modeloConsulta2(){
@@ -71,30 +87,93 @@ public class Inicio extends javax.swing.JFrame {
         jText_Nombre.setEnabled(false);
         jText_Territorio.setEnabled(false);
         jText_Orden.setEnabled(false);
+        jText_FechaE.setEnabled(false);
+        jText_FechaS.setEnabled(false);
         
     }
-    void casillasConsulta3(){
+    void modeloConsulta3(){
         
     }
-    void casillasConsulta4(){
+    void modeloConsulta4(){
+        DefaultTableModel C4= new DefaultTableModel();
+        String[] col4= new String []{"Customer ID"};
+        C4.setColumnIdentifiers(col4);
+        jTableDatos.setModel(C4); 
+        jText_Categoria.setEnabled(false);
+        jText_Localidad.setEnabled(false);
+        jText_Cantidad.setEnabled(false);
+        jText_Apellido.setEnabled(false);
+        jText_Correo.setEnabled(false);
+        jText_Metodo.setEnabled(false);
+        jText_Nombre.setEnabled(false);
+        jText_Territorio.setEnabled(true);
+        jText_Orden.setEnabled(false);
+        jText_FechaE.setEnabled(false);
+        jText_FechaS.setEnabled(false);
         
     }
-    void casillasConsulta5(){
+    void modeloConsulta5(){
         
     }
-    void casillasConsulta6(){
+    void modeloConsulta6(){
         
     }
-    void casillasConsulta7(){
+    void modeloConsulta7(){
         
     }
-    void casillasConsulta8(){
+    void modeloConsulta8(){
+        DefaultTableModel C8= new DefaultTableModel();
+        String[] col8= new String []{"Territorio ID","SalesPersonID","Nombre","Apellidos","Total de pedidos"};
+        C8.setColumnIdentifiers(col8);
+        jTableDatos.setModel(C8); 
+        jText_Categoria.setEnabled(false);
+        jText_Localidad.setEnabled(false);
+        jText_Cantidad.setEnabled(false);
+        jText_Apellido.setEnabled(false);
+        jText_Correo.setEnabled(false);
+        jText_Metodo.setEnabled(false);
+        jText_Nombre.setEnabled(false);
+        jText_Territorio.setEnabled(false);
+        jText_Orden.setEnabled(false);
+        jText_FechaE.setEnabled(false);
+        jText_FechaS.setEnabled(false);
         
     }
-    void casillasConsulta9(){
+    void modeloConsulta9(){
+        DefaultTableModel C9= new DefaultTableModel();
+        String[] col9= new String []{"Territorio ID","Total de Ventas"};
+        C9.setColumnIdentifiers(col9);
+        jTableDatos.setModel(C9); 
+        jText_Categoria.setEnabled(false);
+        jText_Localidad.setEnabled(false);
+        jText_Cantidad.setEnabled(false);
+        jText_Apellido.setEnabled(false);
+        jText_Correo.setEnabled(false);
+        jText_Metodo.setEnabled(false);
+        jText_Nombre.setEnabled(false);
+        jText_Territorio.setEnabled(false);
+        jText_Orden.setEnabled(false);
+        jText_FechaE.setEnabled(true);
+        jText_FechaS.setEnabled(true);
         
     }
-    void casillasConsulta10(){
+    void modeloConsulta10(){
+        System.out.println("consulta 10");
+        DefaultTableModel C10= new DefaultTableModel();
+        String[] col10= new String []{"Territorio ID","Total de Ventas"};
+        C10.setColumnIdentifiers(col10);
+        jTableDatos.setModel(C10); 
+        jText_Categoria.setEnabled(true);
+        jText_Localidad.setEnabled(false);
+        jText_Cantidad.setEnabled(false);
+        jText_Apellido.setEnabled(false);
+        jText_Correo.setEnabled(false);
+        jText_Metodo.setEnabled(false);
+        jText_Nombre.setEnabled(false);
+        jText_Territorio.setEnabled(false);
+        jText_Orden.setEnabled(false);
+        jText_FechaE.setEnabled(false);
+        jText_FechaS.setEnabled(false);
         
     }
 
@@ -134,6 +213,10 @@ public class Inicio extends javax.swing.JFrame {
         jText_Nombre = new javax.swing.JTextField();
         jText_Apellido = new javax.swing.JTextField();
         jText_Correo = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jText_FechaE = new javax.swing.JTextField();
+        jText_FechaS = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -230,6 +313,14 @@ public class Inicio extends javax.swing.JFrame {
 
         jText_Correo.setEnabled(false);
 
+        jLabel11.setText("Fecha de entrada:");
+
+        jLabel12.setText("Fecha de salida:");
+
+        jText_FechaE.setEnabled(false);
+
+        jText_FechaS.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -241,9 +332,6 @@ public class Inicio extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jBox_Consulta, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jBox_Actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(418, 418, 418)
-                        .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -263,23 +351,6 @@ public class Inicio extends javax.swing.JFrame {
                                 .addComponent(jText_Categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(7, 7, 7)
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jText_Metodo, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jText_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jText_Apellido, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jText_Correo, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -291,17 +362,50 @@ public class Inicio extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jText_Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jText_Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(7, 7, 7)
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jText_Metodo, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel8))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(55, 55, 55)
+                                        .addComponent(jLabel11)
+                                        .addGap(4, 4, 4)
+                                        .addComponent(jText_FechaE, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jText_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jText_Apellido, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel10)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jText_Correo, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel12)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jText_FechaS, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                .addContainerGap(87, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 125, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(344, 344, 344))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(131, 131, 131))))
+                        .addGap(98, 98, 98))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(377, 377, 377))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -338,9 +442,15 @@ public class Inicio extends javax.swing.JFrame {
                     .addComponent(jText_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jText_Apellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jText_Correo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12)
+                    .addComponent(jText_FechaE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jText_FechaS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
                 .addGap(24, 24, 24))
         );
@@ -370,15 +480,7 @@ public class Inicio extends javax.swing.JFrame {
         int numero=jBox_Consulta.getSelectedIndex();
         
         if(numero==-1){
-               jText_Categoria.setEnabled(false);
-               jText_Localidad.setEnabled(false);
-               jText_Cantidad.setEnabled(false);
-               jText_Apellido.setEnabled(false);
-               jText_Correo.setEnabled(false);
-               jText_Metodo.setEnabled(false);
-               jText_Nombre.setEnabled(false);
-               jText_Territorio.setEnabled(false);
-               jText_Orden.setEnabled(false);
+               defaultModel();
             
         }else{
             switch(numero){
@@ -394,70 +496,21 @@ public class Inicio extends javax.swing.JFrame {
                break;
                case 2:
                    System.out.println("consulta 4");
-                   DefaultTableModel C4= new DefaultTableModel();
-                   String[] col4= new String []{"Customer ID"};
-                   C4.setColumnIdentifiers(col4);
-                   jTableDatos.setModel(C4); 
-                   jText_Categoria.setEnabled(false);
-                   jText_Localidad.setEnabled(false);
-                   jText_Cantidad.setEnabled(false);
-                   jText_Apellido.setEnabled(false);
-                   jText_Correo.setEnabled(false);
-                   jText_Metodo.setEnabled(false);
-                   jText_Nombre.setEnabled(false);
-                   jText_Territorio.setEnabled(true);
-                   jText_Orden.setEnabled(false);
+                   modeloConsulta4();
                    limpiar();
                break;
                case 3:
                    System.out.println("consulta 8");
-                   DefaultTableModel C8= new DefaultTableModel();
-                   String[] col8= new String []{"Territorio ID","SalesPersonID","Nombre","Apellidos","Total de pedidos"};
-                   C8.setColumnIdentifiers(col8);
-                   jTableDatos.setModel(C8); 
-                   jText_Categoria.setEnabled(false);
-                   jText_Localidad.setEnabled(false);
-                   jText_Cantidad.setEnabled(false);
-                   jText_Apellido.setEnabled(false);
-                   jText_Correo.setEnabled(false);
-                   jText_Metodo.setEnabled(false);
-                   jText_Nombre.setEnabled(false);
-                   jText_Territorio.setEnabled(false);
-                   jText_Orden.setEnabled(false);
+                   modeloConsulta8();
                    limpiar();
                break;
                case 4:
                    System.out.println("consulta 9");
-                   DefaultTableModel C9= new DefaultTableModel();
-                   String[] col9= new String []{"Territorio ID","Total de Ventas"};
-                   C9.setColumnIdentifiers(col9);
-                   jTableDatos.setModel(C9); 
-                   jText_Categoria.setEnabled(true);
-                   jText_Localidad.setEnabled(false);
-                   jText_Cantidad.setEnabled(false);
-                   jText_Apellido.setEnabled(false);
-                   jText_Correo.setEnabled(false);
-                   jText_Metodo.setEnabled(false);
-                   jText_Nombre.setEnabled(false);
-                   jText_Territorio.setEnabled(false);
-                   jText_Orden.setEnabled(false);
+                   modeloConsulta9();
                    limpiar();
                break;
                case 5:
-                   System.out.println("consulta 10");
-                   DefaultTableModel C10= new DefaultTableModel();
-                   String[] col10= new String []{"Territorio ID","Total de Ventas"};
-                   C10.setColumnIdentifiers(col10);
-                   jTableDatos.setModel(C10); 
-                   jText_Categoria.setEnabled(true);
-                   jText_Localidad.setEnabled(false);
-                   jText_Cantidad.setEnabled(false);
-                   jText_Apellido.setEnabled(false);
-                   jText_Correo.setEnabled(false);
-                   jText_Metodo.setEnabled(false);
-                   jText_Nombre.setEnabled(false);
-                   jText_Territorio.setEnabled(false);
-                   jText_Orden.setEnabled(false);
+                   modeloConsulta10();
                    limpiar();
                break;
                default:                  
@@ -470,15 +523,7 @@ public class Inicio extends javax.swing.JFrame {
         int numero=jBox_Actualizar.getSelectedIndex();
         
         if(numero==-1){
-               jText_Categoria.setEnabled(false);
-               jText_Localidad.setEnabled(false);
-               jText_Cantidad.setEnabled(false);
-               jText_Apellido.setEnabled(false);
-               jText_Correo.setEnabled(false);
-               jText_Metodo.setEnabled(false);
-               jText_Nombre.setEnabled(false);
-               jText_Territorio.setEnabled(false);
-               jText_Orden.setEnabled(false);
+               defaultModel();
                limpiar();
             
         }else{
@@ -614,9 +659,59 @@ public class Inicio extends javax.swing.JFrame {
                break;
                case 3:
                    System.out.println("consulta 8");
+                   DefaultTableModel modelo2=(DefaultTableModel)jTableDatos.getModel();//Obtenemos el modelo de la tabla para obtener los titulos
+                   modelo2.setRowCount(0);//Limpiamos la tabla
+                   try{
+                       CallableStatement statement8 = bdd.conectar().prepareCall("{call sp_consulta_H}");
+                       statement8.execute();//ejecutamos el procedimiento
+                       ResultSet consulta8 =statement8.getResultSet();//guardamos resultados
+                    
+                    //recorremos los resultados obtenidos del procedimiento
+                   while(consulta8.next()){
+                        Vector v=new Vector();
+                        v.add(consulta8.getInt(1));//GUardamos los datos de la primera columna
+                        v.add(consulta8.getInt(2));//GUardamos los datos de la primera columna
+                        v.add(consulta8.getString(3));//GUardamos los datos de la primera columna
+                        v.add(consulta8.getString(4));//GUardamos los datos de la primera columna
+                        v.add(consulta8.getInt(5));//GUardamos los datos de la primera columna
+                        modelo2.addRow(v);//Agregamos los datos de las columnas guardadas a la tabla
+                        jTableDatos.setModel(modelo2);//Aplicamos el modelo ocn los datos al objeto tabla
+                        }
+                        
+                       }catch(SQLException ex){
+                        
+                    }
+                   
           
                break;
-               case 4:            
+               case 4: 
+                   System.out.println("consulta 9");
+                   DefaultTableModel modelo3=(DefaultTableModel)jTableDatos.getModel();//Obtenemos el modelo de la tabla para obtener los titulos
+                   modelo3.setRowCount(0);//Limpiamos la tabla
+                   String fechaEntrada=jText_FechaE.getText();
+                   String fechaSalida=jText_FechaS.getText();
+                   try{
+                       //llamando al proceimiento
+                    CallableStatement statement9 = bdd.conectar().prepareCall("{call sp_consulta_I(?,?)}");
+                    statement9.setString(1,fechaEntrada);//asignamos el primer(unico) parametro al procedimiento
+                    statement9.setString(2,fechaSalida);
+                    statement9.execute();//ejecutamos el procedimiento
+                    ResultSet consulta9 =statement9.getResultSet();//guardamos resultados
+                    
+                    
+                    //recorremos los resultados obtenidos del procedimiento
+                   while(consulta9.next()){
+                        Vector v=new Vector();
+                        v.add(consulta9.getInt(1));//GUardamos los datos de la primera columna
+                        v.add(consulta9.getInt(2));//GUardamos los datos de la primera columna
+                        modelo3.addRow(v);//Agregamos los datos de las columnas guardadas a la tabla
+                        jTableDatos.setModel(modelo3);//Aplicamos el modelo ocn los datos al objeto tabla
+                        }
+                        
+                       }catch(SQLException ex){
+                        
+                    }
+                   
                    
                break;
                case 5:
@@ -751,6 +846,8 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -767,6 +864,8 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JTextField jText_Cantidad;
     private javax.swing.JTextField jText_Categoria;
     private javax.swing.JTextField jText_Correo;
+    private javax.swing.JTextField jText_FechaE;
+    private javax.swing.JTextField jText_FechaS;
     private javax.swing.JTextField jText_Localidad;
     private javax.swing.JTextField jText_Metodo;
     private javax.swing.JTextField jText_Nombre;
