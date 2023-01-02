@@ -9,6 +9,8 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,6 +27,7 @@ public class Inicio extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);//Colooca la ventana en medio de la pantalla
         setTitle("Adventure");//Cambia el titulo del frame
+        jLabelCorreoInvalido.setVisible(false);
         
         
     }
@@ -39,8 +42,9 @@ public class Inicio extends javax.swing.JFrame {
         jText_Nombre.setEnabled(false);
         jText_Territorio.setEnabled(false);
         jText_Orden.setEnabled(false);
-        jText_FechaE.setEnabled(false);
-        jText_FechaS.setEnabled(false);
+        jDateEntrada.setEnabled(false);
+        jDateSalida.setEnabled(false);
+        
     }
     
     void limpiar(){
@@ -69,9 +73,8 @@ public class Inicio extends javax.swing.JFrame {
         jText_Nombre.setEnabled(false);
         jText_Territorio.setEnabled(false);
         jText_Orden.setEnabled(false);
-        jText_FechaE.setEnabled(false);
-        jText_FechaS.setEnabled(false);
-        
+        jDateEntrada.setEnabled(false);
+        jDateSalida.setEnabled(false);        
     }
     void modeloConsulta2(){
         DefaultTableModel C2= new DefaultTableModel();
@@ -87,8 +90,8 @@ public class Inicio extends javax.swing.JFrame {
         jText_Nombre.setEnabled(false);
         jText_Territorio.setEnabled(false);
         jText_Orden.setEnabled(false);
-        jText_FechaE.setEnabled(false);
-        jText_FechaS.setEnabled(false);
+        jDateEntrada.setEnabled(false);
+        jDateSalida.setEnabled(false); 
         
     }
     void modeloConsulta3(){
@@ -108,8 +111,8 @@ public class Inicio extends javax.swing.JFrame {
         jText_Nombre.setEnabled(false);
         jText_Territorio.setEnabled(true);
         jText_Orden.setEnabled(false);
-        jText_FechaE.setEnabled(false);
-        jText_FechaS.setEnabled(false);
+        jDateEntrada.setEnabled(false);
+        jDateSalida.setEnabled(false); 
         
     }
     void modeloConsulta5(){
@@ -135,8 +138,8 @@ public class Inicio extends javax.swing.JFrame {
         jText_Nombre.setEnabled(false);
         jText_Territorio.setEnabled(false);
         jText_Orden.setEnabled(false);
-        jText_FechaE.setEnabled(false);
-        jText_FechaS.setEnabled(false);
+        jDateEntrada.setEnabled(false);
+        jDateSalida.setEnabled(false); 
         
     }
     void modeloConsulta9(){
@@ -153,8 +156,8 @@ public class Inicio extends javax.swing.JFrame {
         jText_Nombre.setEnabled(false);
         jText_Territorio.setEnabled(false);
         jText_Orden.setEnabled(false);
-        jText_FechaE.setEnabled(true);
-        jText_FechaS.setEnabled(true);
+        jDateEntrada.setEnabled(true);
+        jDateSalida.setEnabled(true); 
         
     }
     void modeloConsulta10(){
@@ -172,8 +175,8 @@ public class Inicio extends javax.swing.JFrame {
         jText_Nombre.setEnabled(false);
         jText_Territorio.setEnabled(false);
         jText_Orden.setEnabled(false);
-        jText_FechaE.setEnabled(false);
-        jText_FechaS.setEnabled(false);
+        jDateEntrada.setEnabled(false);
+        jDateSalida.setEnabled(false); 
         
     }
 
@@ -215,8 +218,9 @@ public class Inicio extends javax.swing.JFrame {
         jText_Correo = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jText_FechaE = new javax.swing.JTextField();
-        jText_FechaS = new javax.swing.JTextField();
+        jDateEntrada = new com.toedter.calendar.JDateChooser();
+        jDateSalida = new com.toedter.calendar.JDateChooser();
+        jLabelCorreoInvalido = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -228,7 +232,7 @@ public class Inicio extends javax.swing.JFrame {
         jBox_Consulta.setName(""); // NOI18N
         jBox_Consulta.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                seleccion(evt);
+                seleccionConsulta(evt);
             }
         });
 
@@ -264,7 +268,7 @@ public class Inicio extends javax.swing.JFrame {
         jBox_Actualizar.setEnabled(false);
         jBox_Actualizar.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                seleccion2(evt);
+                seleccionActualizar(evt);
             }
         });
 
@@ -312,14 +316,24 @@ public class Inicio extends javax.swing.JFrame {
         jText_Apellido.setEnabled(false);
 
         jText_Correo.setEnabled(false);
+        jText_Correo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jText_CorreoKeyReleased(evt);
+            }
+        });
 
         jLabel11.setText("Fecha de entrada:");
 
         jLabel12.setText("Fecha de salida:");
 
-        jText_FechaE.setEnabled(false);
+        jDateEntrada.setEnabled(false);
 
-        jText_FechaS.setEnabled(false);
+        jDateSalida.setEnabled(false);
+
+        jLabelCorreoInvalido.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelCorreoInvalido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelCorreoInvalido.setText("Correo invalido");
+        jLabelCorreoInvalido.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -328,72 +342,29 @@ public class Inicio extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(207, 207, 207)
+                        .addGap(87, 87, 87)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jBox_Consulta, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jBox_Actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
+                            .addComponent(jRadio_Actializacion)
+                            .addComponent(jRadio_Consulta)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(97, 97, 97)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(55, 55, 55)
                                 .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(18, 18, 18)
                                 .addComponent(jText_Orden, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(87, 87, 87)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jRadio_Actializacion)
-                                    .addComponent(jRadio_Consulta)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(47, 47, 47)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jText_Categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jText_Localidad, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jText_Territorio, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jText_Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(7, 7, 7)
-                                        .addComponent(jLabel7)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jText_Metodo, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel8))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(55, 55, 55)
-                                        .addComponent(jLabel11)
-                                        .addGap(4, 4, 4)
-                                        .addComponent(jText_FechaE, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jText_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel9)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jText_Apellido, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel10)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jText_Correo, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel12)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jText_FechaS, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addContainerGap(87, Short.MAX_VALUE))
+                                .addComponent(jText_Categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jText_Metodo, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jText_Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -402,10 +373,57 @@ public class Inicio extends javax.swing.JFrame {
                         .addGap(344, 344, 344))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(98, 98, 98))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(377, 377, 377))))
+                        .addGap(98, 98, 98))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(82, 82, 82)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jText_Territorio, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jText_Localidad, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jBox_Consulta, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBox_Actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(172, 172, 172)
+                        .addComponent(jLabel7)
+                        .addGap(137, 137, 137)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jText_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jText_Apellido, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(378, 378, 378))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(117, 117, 117)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jText_Correo, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jDateEntrada, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jDateSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(133, 133, 133))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabelCorreoInvalido, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -420,7 +438,7 @@ public class Inicio extends javax.swing.JFrame {
                 .addComponent(jRadio_Actializacion)
                 .addGap(4, 4, 4)
                 .addComponent(jBox_Actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jText_Categoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -438,21 +456,24 @@ public class Inicio extends javax.swing.JFrame {
                     .addComponent(jText_Metodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
                     .addComponent(jLabel9)
-                    .addComponent(jLabel10)
-                    .addComponent(jText_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jText_Apellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jText_Correo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jText_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel12)
-                    .addComponent(jText_FechaE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jText_FechaS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel11)
+                        .addComponent(jDateEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel10)
+                        .addComponent(jText_Correo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDateSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelCorreoInvalido)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addGap(24, 24, 24))
+                .addContainerGap())
         );
 
         pack();
@@ -475,7 +496,7 @@ public class Inicio extends javax.swing.JFrame {
         jBox_Actualizar.setSelectedIndex(-1);
     }//GEN-LAST:event_opcion2
 
-    private void seleccion(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_seleccion
+    private void seleccionConsulta(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_seleccionConsulta
         // TODO add your handling code here:
         int numero=jBox_Consulta.getSelectedIndex();
         
@@ -516,9 +537,9 @@ public class Inicio extends javax.swing.JFrame {
                default:                  
            }
          }
-    }//GEN-LAST:event_seleccion
+    }//GEN-LAST:event_seleccionConsulta
 
-    private void seleccion2(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_seleccion2
+    private void seleccionActualizar(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_seleccionActualizar
         // TODO add your handling code here:
         int numero=jBox_Actualizar.getSelectedIndex();
         
@@ -587,7 +608,7 @@ public class Inicio extends javax.swing.JFrame {
                           
        }
           
-    }//GEN-LAST:event_seleccion2
+    }//GEN-LAST:event_seleccionActualizar
 
     private void Ejecutar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Ejecutar
         // TODO add your handling code here:
@@ -596,12 +617,16 @@ public class Inicio extends javax.swing.JFrame {
         Conexiones bdd = new Conexiones();
         bdd.conectar();
         if(op!=false){
-            System.out.println("gg");
+            System.out.println("Entrando a consultas");
             numConsulta=jBox_Consulta.getSelectedIndex();
             switch(numConsulta){
                 case 0:
                     System.out.println("consulta 1");
                     DefaultTableModel modelo=(DefaultTableModel)jTableDatos.getModel();//Obtenemos el modelo de la tabla para obtener los titulos
+                    if(jText_Categoria.getText().isEmpty()){
+                        JOptionPane.showMessageDialog(null, "Ingrese los datos solicitados", "Error de parametros", JOptionPane.WARNING_MESSAGE);
+                        break;  
+                    }
                     int cat=Integer.parseInt(jText_Categoria.getText());//Obtenemos el parametro para el SP
                     modelo.setRowCount(0);//Limpiamos la tabla
                     try{
@@ -621,6 +646,7 @@ public class Inicio extends javax.swing.JFrame {
                     }
                         
                     }catch(SQLException ex){
+                        JOptionPane.showMessageDialog(null, "Error en la consulta", "Error", JOptionPane.WARNING_MESSAGE);
                         
                     }
                     
@@ -635,6 +661,10 @@ public class Inicio extends javax.swing.JFrame {
                case 2:
                    System.out.println("consulta 4");
                     DefaultTableModel modelo1=(DefaultTableModel)jTableDatos.getModel();//Obtenemos el modelo de la tabla para obtener los titulos
+                    if(jText_Territorio.getText().isEmpty()){
+                        JOptionPane.showMessageDialog(null, "Ingrese los datos solicitados", "Error de parametros", JOptionPane.WARNING_MESSAGE);
+                        break;  
+                    }
                     int terr=Integer.parseInt(jText_Territorio.getText());//Obtenemos el parametro para el SP
                     modelo1.setRowCount(0);//Limpiamos la tabla
                     try{
@@ -653,6 +683,7 @@ public class Inicio extends javax.swing.JFrame {
                     }
                         
                     }catch(SQLException ex){
+                        JOptionPane.showMessageDialog(null, "Error en la consulta", "Error", JOptionPane.WARNING_MESSAGE);
                         
                     }
           
@@ -679,15 +710,17 @@ public class Inicio extends javax.swing.JFrame {
                         }
                         
                        }catch(SQLException ex){
+                           JOptionPane.showMessageDialog(null, "Error en la consulta", "Error", JOptionPane.WARNING_MESSAGE);
                         
                     }
                    
           
                break;
                case 4: 
-                   System.out.println("consulta 9");
+                  /* System.out.println("consulta 9");
                    DefaultTableModel modelo3=(DefaultTableModel)jTableDatos.getModel();//Obtenemos el modelo de la tabla para obtener los titulos
                    modelo3.setRowCount(0);//Limpiamos la tabla
+                   
                    String fechaEntrada=jText_FechaE.getText();
                    String fechaSalida=jText_FechaS.getText();
                    try{
@@ -709,11 +742,13 @@ public class Inicio extends javax.swing.JFrame {
                         }
                         
                        }catch(SQLException ex){
-                        
-                    }
+                           JOptionPane.showMessageDialog(null, "Error en la consulta", "Error", JOptionPane.WARNING_MESSAGE);     
+                       }
                    
+                   */
                    
                break;
+                   
                case 5:
                    System.out.println("consulta 10");
                break;
@@ -721,11 +756,15 @@ public class Inicio extends javax.swing.JFrame {
            }
             
         }else{
-            System.out.println("oo");
+            System.out.println("Entrando a actualizaciones");
             numConsulta=jBox_Actualizar.getSelectedIndex();
             switch(numConsulta){
                 case 0:
                     System.out.println("consulta 3");
+                    if((jText_Localidad.getText().isEmpty()) && (jText_Categoria.getText().isEmpty())){
+                        JOptionPane.showMessageDialog(null, "Ingrese los datos solicitados", "Error de parametros", JOptionPane.WARNING_MESSAGE);
+                        break;  
+                    }
                     int cat=Integer.parseInt(jText_Categoria.getText());
                     int loc=Integer.parseInt(jText_Localidad.getText());
                      //llamamos al procedimiento
@@ -735,14 +774,20 @@ public class Inicio extends javax.swing.JFrame {
                     statement3.setInt(2,loc);
                     statement3.execute();//ejecutamos el procedimiento
                     ResultSet consulta3=statement3.getResultSet();//guardamos resultados
-                    JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
                     }catch(SQLException ex){
-                        
+                        JOptionPane.showMessageDialog(null, "Error en la actualización", "Error", JOptionPane.WARNING_MESSAGE);    
                     }
+                    JOptionPane.showMessageDialog(null, "Actualización realizada correctamente", "", JOptionPane.INFORMATION_MESSAGE);
                     
                 break;
+                
+                
                 case 1:
                     System.out.println("consulta 5");
+                    if((jText_Cantidad.getText().isEmpty()) && (jText_Orden.getText().isEmpty())){
+                        JOptionPane.showMessageDialog(null, "Ingrese los datos solicitados", "Error de parametros", JOptionPane.WARNING_MESSAGE);
+                        break;  
+                    }
                     int cantidad=Integer.parseInt(jText_Cantidad.getText());
                     int orden1=Integer.parseInt(jText_Orden.getText());
                     
@@ -753,13 +798,20 @@ public class Inicio extends javax.swing.JFrame {
                         statement5.execute();//ejecutamos el procedimiento
                         ResultSet consulta5 =statement5.getResultSet();//guardamos resultados
                     }catch(SQLException ex){
+                        JOptionPane.showMessageDialog(null, "Error en la actualización", "Error", JOptionPane.WARNING_MESSAGE);
                         
                     }
-                    JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
+                    JOptionPane.showMessageDialog(null, "Actualización realizada correctamente", "", JOptionPane.INFORMATION_MESSAGE);
                     
                 break;
+                
+                
                 case 2:
                     System.out.println("consulta 6");
+                    if((jText_Metodo.getText().isEmpty()) && (jText_Orden.getText().isEmpty())){
+                        JOptionPane.showMessageDialog(null, "Ingrese los datos solicitados", "Error de parametros", JOptionPane.WARNING_MESSAGE);
+                        break;  
+                    }
                     int met=Integer.parseInt(jText_Metodo.getText());
                     int orden2=Integer.parseInt(jText_Orden.getText());
                     try{
@@ -769,14 +821,20 @@ public class Inicio extends javax.swing.JFrame {
                         statement6.execute();//ejecutamos el procedimiento
                         ResultSet consulta6 =statement6.getResultSet();//guardamos resultados 
                     }catch(SQLException ex){
+                        JOptionPane.showMessageDialog(null, "Error en la actualización", "Error", JOptionPane.WARNING_MESSAGE);
                         
                     }
-
-                    JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
+                    JOptionPane.showMessageDialog(null, "Actualización realizada correctamente", "", JOptionPane.INFORMATION_MESSAGE);
                   
                 break;
-                case 3:
+                
+                
+                case 3:                  
                     System.out.println("consulta 7");
+                    if((jLabelCorreoInvalido.isVisible()== true) && ((jText_Localidad.getText().isEmpty()) && (jText_Categoria.getText().isEmpty()))){
+                        JOptionPane.showMessageDialog(null, "Ingrese los datos solicitados", "Error de parametros", JOptionPane.WARNING_MESSAGE);
+                        break;
+                    }
                     String nom=jText_Nombre.getText();
                     String ap=jText_Nombre.getText();
                     String correo=jText_Nombre.getText();
@@ -790,9 +848,11 @@ public class Inicio extends javax.swing.JFrame {
                         ResultSet consulta7 =statement7.getResultSet();//guardamos resultados
                         
                     }catch(SQLException ex){
+                        JOptionPane.showMessageDialog(null, "Error en la actualización", "Error", JOptionPane.WARNING_MESSAGE);
+                        
                         
                     }
-                    JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
+                        JOptionPane.showMessageDialog(null, "Actualización realizada correctamente", "", JOptionPane.INFORMATION_MESSAGE);
                     
                     
                 break;
@@ -804,6 +864,22 @@ public class Inicio extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_Ejecutar
 
+    private void jText_CorreoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jText_CorreoKeyReleased
+        // TODO add your handling code here:
+        if(verificarCorreo(jText_Correo.getText())){
+            jLabelCorreoInvalido.setVisible(false);   
+        }else{
+            jLabelCorreoInvalido.setVisible(true);
+        }
+    }//GEN-LAST:event_jText_CorreoKeyReleased
+
+    public boolean verificarCorreo(String correo){
+        Pattern patron = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                                    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        Matcher mat=patron.matcher(correo);
+        return mat.find();
+    }
+   
     /**
      * @param args the command line arguments
      */
@@ -844,6 +920,8 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jBox_Actualizar;
     private javax.swing.JComboBox<String> jBox_Consulta;
     private javax.swing.JButton jButton1;
+    private com.toedter.calendar.JDateChooser jDateEntrada;
+    private com.toedter.calendar.JDateChooser jDateSalida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -856,6 +934,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelCorreoInvalido;
     private javax.swing.JRadioButton jRadio_Actializacion;
     private javax.swing.JRadioButton jRadio_Consulta;
     private javax.swing.JScrollPane jScrollPane2;
@@ -864,8 +943,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JTextField jText_Cantidad;
     private javax.swing.JTextField jText_Categoria;
     private javax.swing.JTextField jText_Correo;
-    private javax.swing.JTextField jText_FechaE;
-    private javax.swing.JTextField jText_FechaS;
     private javax.swing.JTextField jText_Localidad;
     private javax.swing.JTextField jText_Metodo;
     private javax.swing.JTextField jText_Nombre;
